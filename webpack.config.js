@@ -4,7 +4,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:8081/",
+    publicPath: "https://static-page-generator-host.vercel.app/",
   },
 
   resolve: {
@@ -43,7 +43,10 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "navbar",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        navbar:
+          "navbar@https://static-page-generator-host.vercel.app/remoteEntry.js",
+      },
       exposes: {},
       shared: {
         ...deps,
